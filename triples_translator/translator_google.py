@@ -32,7 +32,7 @@ def translate(input, target='en'):
     submit = WebDriverWait(browser, 10).until(EC.presence_of_element_located((By.XPATH, '//*[@id="source"]')))
     submit.clear()
     submit.send_keys(input)
-    time.sleep(0.5)
+    time.sleep(1)
     WebDriverWait(browser, 10).until(EC.presence_of_element_located((By.XPATH, '//span[@class="tlid-translation translation"]')))
     time.sleep(0.5)
     source = etree.HTML(browser.page_source)
@@ -64,7 +64,14 @@ if __name__ == '__main__':
             for line in lines:
                 print('读取第' + str(i) + '行')
                 line = line.strip('\n')
-                dest_file.write(reformat(translate(line) + '\n'))
-                i += 1
+                while True:
+                    try:
+                        dest_file.write(reformat(translate(line) + '\n'))
+                        i += 1
+                    except:
+                        print('error: ' + str(i))
+                        time.sleep(300)
+                        continue
+                    break
     print('翻译完成。')
     browser.quit()

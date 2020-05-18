@@ -7,11 +7,11 @@ import random
 import time
 import requests
 import re
+import winsound
 
-SOURCE = r'F:\Projects\COVID19-kg\source_data\dataset0501\Chinese\infobox_property\baidu\drug_property_value.txt'
-DEST = r'F:\Projects\COVID19-kg\source_data\dataset0501\English\infobox_property\baidu\drug_property_value.txt'
-CHECKPOINT = 30000  # 上次写入到哪一行结束。如果是新文件，设为-1
-BATCH_SIZE = 20     # 一次翻译的行数
+SOURCE = r'f:\Projects\COVID19-kg\source_data\dataset0501\Chinese\text_property\zhwiki_text_triples.txt'
+DEST = r'f:\Projects\COVID19-kg\source_data\dataset0501\English\text_property\zhwiki_text_triples.txt'
+BATCH_SIZE = 30
 
 url = "http://api.fanyi.baidu.com/api/trans/vip/translate"
 app_id = '20200517000458913'  # 你的appid
@@ -50,8 +50,7 @@ with open(SOURCE, 'r', encoding='utf-8') as source_file:
         lines = source_file.readlines()
         end_line = lines[-1]
         output = ''
-
-        i = CHECKPOINT + 1
+        i = 0
         while i < len(lines):
             sub_input = ''
             print('翻译第' + str(i) + '到', end='')
@@ -60,7 +59,7 @@ with open(SOURCE, 'r', encoding='utf-8') as source_file:
                 # lines[i] = lines[i].replace('\n', r'\n')
                 sub_input += lines[i]
                 i += 1
-                if i == len(lines) or j == 19:
+                if i == len(lines) or j == BATCH_SIZE - 1:
                     print(str(i) + '行')
                     break
             # 翻译拼接好的字符串
@@ -75,3 +74,7 @@ with open(SOURCE, 'r', encoding='utf-8') as source_file:
                     continue
                 break
 print('翻译完成。')
+winsound.Beep(500, 500)
+winsound.Beep(600, 500)
+winsound.Beep(800, 700)
+
