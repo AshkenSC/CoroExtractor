@@ -72,19 +72,4 @@ with open(SOURCE, 'r', encoding='utf-8') as source_file:
                     time.sleep(5)
                     continue
                 break
-        # for i in range(0, len(lines), 10):
-        #     print('读取第' + str(i) + '行')
-        #     print
-        #     line = line.strip('\n')
-        #     while True:
-        #         try:
-        #             translated = get_tra_res(line)
-        #             translated = re.sub(r'([ ;]+)ll([ ;]+)', ';;;;ll;;;;', translated)
-        #             dest_file.write(translated + '\n')
-        #             i += 1
-        #         except:
-        #             print('error: ' + str(i))
-        #             time.sleep(30)
-        #             continue
-        #         break
 print('翻译完成。')
