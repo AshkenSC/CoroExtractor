@@ -74,22 +74,4 @@ with open(SOURCE, 'r', encoding='utf-8') as source_file:
                     time.sleep(5)
                     continue
                 break
-
-        # 老版本代码
-        # for i in range(CHECKPOINT+1, len(lines)):
-        #     print('读取第' + str(i) + '行...', end='')
-        #     lines[i] = lines[i].strip('\n')
-        #     while True:
-        #         try:
-        #             translated = get_tra_res(lines[i])
-        #             print(translated)
-        #             translated = re.sub(r'([ ;]+)ll([ ;]+)', ';;;;ll;;;;', translated)
-        #             dest_file.write(translated + '\n')
-        #             i += 1
-        #             print('写入完成:' + str(i) + '\n')
-        #         except:
-        #             print('error: ' + str(i))
-        #             time.sleep(30)
-        #             continue
-        #         break
 print('翻译完成。')
